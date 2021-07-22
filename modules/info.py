@@ -10,14 +10,14 @@ from utils.Config import Config
 Config = Config()
 
 
-@Client.on_message(filters.command(['info', 'info@vcplayerbot']) & ~filters.edited & ~filters.bot)
+@Client.on_message(filters.command(['info', 'info@dimastapios_bot']) & ~filters.edited & ~filters.bot)
 @database_check
 @chat_allowed
 @admin_check
 async def info(client, message, current_client):
     try:
         chat_id = message.chat.id
-        logInfo(f"Info command in chat : {chat_id}")
+        logInfo(f"Info perintah di chat : {chat_id}")
 
         forceCreate = False
         if message.from_user is not None and hasattr(message.from_user, 'id') and message.from_user.id in [i['chat_id'] for i in Config.get('GLOBAL_ADMINS')]:
@@ -40,7 +40,7 @@ async def info(client, message, current_client):
         logException(f"Error in info: {ex}", True)
 
 
-@Client.on_message(filters.command(['start', 'start@vcplayerbot', 'help', 'help@vcplayerbot']) & ~filters.edited)
+@Client.on_message(filters.command(['start', 'start@vcplayerbot', 'help', 'help@dimastapios_bot']) & ~filters.edited)
 async def help(client, message, current_client=None):
     try:
         chat_id = message.chat.id
