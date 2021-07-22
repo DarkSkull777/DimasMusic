@@ -10,13 +10,13 @@ from utils.Config import Config
 Config = Config()
 
 
-@Client.on_message(filters.command(['loop', 'loop@vcplayerbot']) & ~filters.edited & ~filters.bot)
+@Client.on_message(filters.command(['loop', 'loop@dimastapios_bot']) & ~filters.edited & ~filters.bot)
 @chat_allowed
 @admin_mode_check
 async def loopPlay(client, message, current_client):
     try:
         chat_id = message.chat.id
-        logInfo(f"loopPlay command in chat : {chat_id}")
+        logInfo(f"loopPlay perintah dalam obrolan : {chat_id}")
         command = None
         found = False
         if len(message.command) > 1:
@@ -35,7 +35,7 @@ async def loopPlay(client, message, current_client):
                     pass
 
         if found is False:
-            msg = f"**❌ Invalid Command :**\n• `/loop off` - __Turn off loop for all songs.__\n• `/loop [2-5]` - __Loop songs [x] times , x must be between 2-5.__"
+            msg = f"**❌ Perintah Tidak Valid :**\n• `/loop off` - Matikan loop untuk semua lagu..__\n• `/loop [2-5]` - __Loop lagu [x] kali , x harus antara 2-5.__"
             m = await client.send_message(message.chat.id, f"{msg}")
             if current_client.get('remove_messages') is not None and current_client.get('remove_messages') > 0:
                 await delayDelete(m, current_client.get('remove_messages'))
@@ -60,10 +60,10 @@ async def loopPlay(client, message, current_client):
         if command == "off":
             pytgcalls_instance.repeatCount = 1
             pytgcalls_instance.currentRepeatCount = 0
-            m = await client.send_message(message.chat.id, f"✔️ **__Done loop playback turned off, now all songs will be played just once.__**")
+            m = await client.send_message(message.chat.id, f"✔️ **__Pemutaran loop selesai dimatikan, sekarang semua lagu hanya akan diputar sekali.__**")
         else:
             pytgcalls_instance.repeatCount = command
-            m = await client.send_message(message.chat.id, f"✔️ **__Done Loop Playback turned on, now all songs will repeat {command} times.__**")
+            m = await client.send_message(message.chat.id, f"✔️ **__Done Loop Pemutaran dihidupkan, sekarang semua lagu akan diulang {command} times.__**")
 
         if current_client.get('remove_messages') is not None and current_client.get('remove_messages') > 0:
             await delayDelete(m, current_client.get('remove_messages'))
