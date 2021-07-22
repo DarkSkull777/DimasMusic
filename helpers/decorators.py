@@ -104,8 +104,8 @@ def admin_check(func: Callable) -> Callable:
                 return await func(client, message, current_client)
             else:
                 logWarning(
-                    f"Action blocked as user is not admin : {message.from_user} in chat {chat_id}, current_chat admins : {admins}")
-                m = await client.send_message(message.chat.id, f"**__This action can be performed only by admins.__**")
+                    f"Tindakan diblokir karena pengguna bukan admin : {message.from_user} in chat {chat_id}, current_chat admins : {admins}")
+                m = await client.send_message(message.chat.id, f"**__Tindakan ini hanya dapat dilakukan oleh admin.__**")
                 await delayDelete(m, 10)
         except Exception as ex:
             logException(f"Error in admin_check : {ex}", True)
@@ -123,9 +123,9 @@ def admin_mode_check(func: Callable) -> Callable:
                 return await func(client, message, current_client)
 
             logWarning(
-                f"Action blocked as user is not admin and admin_mode is on : {message.from_user} , current_chat admins : {admins}")
-            msg = f"**❌ Admin mode is on in chat and your are not an admin[ Bot Admin ].**"
-            msg = msg + f"\n\n__Ask the admin to add you as admin using /auth command or disable the admin mode.__"
+                f"Tindakan diblokir karena pengguna bukan admin dan admin_mode is on : {message.from_user} , current_chat admins : {admins}")
+            msg = f"**❌ Mode admin aktif dalam obrolan dan Anda bukan admin [ Admin Bot ].**"
+            msg = msg + f"\n\n__Minta admin untuk menambahkan Anda sebagai admin menggunakan perintah /auth atau menonaktifkan mode admin.__"
             m = await client.send_message(message.chat.id, f"{msg}")
             await delayDelete(m, 10)
         except Exception as ex:
@@ -137,7 +137,7 @@ def database_check(func: Callable) -> Callable:
     async def decorator(client: Client, message: Message):
         try:
             if MongoDBClient.client is None:
-                m = await client.send_message(message.chat.id, f"**__This action is allowed only if mongo databse url is provided in env parameter.__**")
+                m = await client.send_message(message.chat.id, f"**__Tindakan ini hanya diperbolehkan jika url basis data mongo disediakan dalam parameter env.__**")
                 await delayDelete(m, 10)
             return await func(client, message)
         except Exception as ex:
