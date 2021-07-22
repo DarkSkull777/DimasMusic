@@ -7,13 +7,13 @@ Official Bot : [Klik](https://telegram.me/botdimasdoang)   |   Discussion Group 
   <img width="200" height="200" src="https://telegra.ph/file/90f63abb9e487fdc35241.jpg">
 </p>
 
-[Dimas Bot Informasi](https://t.me/botdimasdoang
+[Dimas Bot Informasi](https://t.me/botdimasdoang)
 
 
+
+# Deploy Heroku
 - [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-# Deploy
-[commands](https://github.com/DarkSkull777/DimasMusic#features)
+[Dimasrmdani](https://t.me/xskull7)
 
 
 # Fitur
