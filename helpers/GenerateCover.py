@@ -31,7 +31,7 @@ async def generate_cover(title, thumbnail, result_file_name):
     final_img = None
     try:
         logInfo(
-            f"Request to generate cover for title : {title} , thumbnail : {thumbnail} , filename : {result_file_name}")
+            f"Permintaan untuk membuat sampul untuk judul : {title} , thumbnail : {thumbnail} , filename : {result_file_name}")
         if len(title) == 0:
             return None
         title = title.strip()
@@ -51,17 +51,17 @@ async def generate_cover(title, thumbnail, result_file_name):
         img = Image.open(f"images/{temp_file}.png")
         draw = ImageDraw.Draw(img)
 
-        draw.text((10, 580), f"Now Playing", fill="white", font=ITC_REG)
+        draw.text((10, 580), f"Sedang dimainkan", fill="white", font=ITC_REG)
 
         draw.text((10, 640), f"{title}", fill="white", font=KRONA_52)
 
-        draw.text((985, 20), f"A SkTechHub", fill="white", font=KRONA_SMALL)
+        draw.text((985, 20), f"Dimasrmdani", fill="white", font=KRONA_SMALL)
         draw.text((1100, 50), f"Product", fill="white", font=KRONA_SMALL)
 
         img.save(result_file_name, optimize=True, quality=20)
         final_img = result_file_name
     except Exception as ex:
-        logException(f"Error while generating cover : {ex}", True)
+        logException(f"Error sambil menghasilkan penutup : {ex}", True)
         final_img = None
     finally:
         return result_file_name if final_img is not None else None
