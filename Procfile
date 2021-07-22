@@ -1,1 +1,1 @@
-worker: python3 main.py
+dimas: python3 main.py
