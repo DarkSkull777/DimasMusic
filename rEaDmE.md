@@ -1,13 +1,13 @@
 # Bot Dimas Music Untuk Obrolan Suara Telegram
 Putar lagu apa pun langsung ke obrolan suara grup kamu.
 
-Official Bot : [Klik](https://telegram.me/botdimasdoang)   |   Discussion Group : [VoiceChat Music Player Support](https://telegram.me/botdimasdoang)
+Official Bot : [Klik](https://telegram.me/botdimasdoang)   |   Discussion Group : [Support](https://telegram.me/botdimasdoang)
 
 <p align="center">
   <img width="200" height="200" src="https://telegra.ph/file/90f63abb9e487fdc35241.jpg">
 </p>
 
-[Checkout AutoForwarder Bot](https://sktechhub.com/auto-forward)
+[Dimas Bot Informasi](https://t.me/botdimasdoang
 
 
 - [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
