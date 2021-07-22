@@ -74,7 +74,7 @@ async def leaveStaleChats():
                 left.append(chat_id)
             except Exception as ex:
                 failed.append(chat_id)
-                logWarning(f"Error in leave chat inside loop {ex}")
-        logException(f"Left the chats : Done {left} , Failed : {failed} ")
+                logWarning(f"Kesalahan dalam meninggalkan obrolan di dalam loop {ex}")
+        logException(f"Meninggalkan obrolan : Selesai {left} , Failed : {failed} ")
     except Exception as ex:
         logException(f"Error in leaveStaeChats , {ex}", True)
