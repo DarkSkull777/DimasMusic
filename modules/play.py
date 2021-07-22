@@ -96,7 +96,7 @@ async def play(client, message, current_client):
                 cover_file_name = None
                 # generate thumbnail only if the song is first one and not for queue
                 if pytgcalls_instance.active is not True:
-                    sent_msg = await sent_msg.edit(f"**__ 🎥 Membuat Gambar Mini __**")
+                    sent_msg = await sent_msg.edit(f"**__ 🧐Sedang Mencari __**")
                     cover_file_name = None
                     if song_info.get('thumbnails') is not None and len(song_info['thumbnails']) > 0:
                         cover_file_name = f"images/{uuid.uuid4()}.png"
