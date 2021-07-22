@@ -47,7 +47,7 @@ async def play(client, message, current_client):
         if len(song_url_name) > 1:
             song_url_name = " ".join(song_url_name[1:])
         else:
-            m = await client.send_message(message.chat.id, f"**Perintah Tidak Valid, Harap berikan url/nama lagu.\ncontoh:__/play asede __**")
+            m = await client.send_message(message.chat.id, f"**Perintah Tidak Valid, Harap berikan url/nama lagu.\ncontoh:__/play Aldi Taher To The Bone __**")
             if current_client.get('remove_messages') is not None and current_client.get('remove_messages') > 0:
                 await delayDelete(m, current_client.get('remove_messages'))
             return
@@ -148,7 +148,7 @@ async def play(client, message, current_client):
                             input_peer = await callmanager.user_app.resolve_peer(message.chat.id)
                             chat = await callmanager.user_app.send(GetFullChannel(channel=input_peer))
                             title_change = EditGroupCallTitle(call=chat.full_chat.call,
-                                                              title="Song Player | By Dimas Botz")
+                                                              title="Song | By Dimas Botz")
                             await callmanager.user_app.send(title_change)
                         except Exception as ex:
                             logWarning(
