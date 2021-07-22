@@ -32,7 +32,7 @@ DownloaderService = Downloader()
 Config = Config()
 
 
-@Client.on_message(filters.command(['play', 'play@vcplayerbot']) & ~filters.edited & ~filters.bot)
+@Client.on_message(filters.command(['play', 'play@dimastapios_bot']) & ~filters.edited & ~filters.bot)
 @chat_allowed
 @admin_mode_check
 async def play(client, message, current_client):
@@ -41,13 +41,13 @@ async def play(client, message, current_client):
             message.from_user, 'username') else 'User')} if message.from_user is not None else {"chat_id": message.chat.id, "title": message.chat.title if hasattr(message.chat, 'ttile') else 'Chat'}
         chat_id = message.chat.id
         logInfo(
-            f"Playing command in chat : {chat_id} , requested_by : {requested_by}")
+            f"Memainkan perintah dalam obrolan : {chat_id} , requested_by : {requested_by}")
         # check if song url or name is provided or not
         song_url_name = message.text.split(" ")
         if len(song_url_name) > 1:
             song_url_name = " ".join(song_url_name[1:])
         else:
-            m = await client.send_message(message.chat.id, f"**Invalid Command, Please provide a song url/name.\nEg:__/play faded by alan walker __**")
+            m = await client.send_message(message.chat.id, f"**Perintah Tidak Valid, Harap berikan url/nama lagu.\ncontoh:__/play asede __**")
             if current_client.get('remove_messages') is not None and current_client.get('remove_messages') > 0:
                 await delayDelete(m, current_client.get('remove_messages'))
             return
@@ -81,13 +81,13 @@ async def play(client, message, current_client):
                     await delayDelete(m, current_client.get('remove_messages'))
                 return
 
-        sent_msg = await client.send_message(message.chat.id, f"**__Fetching song details... __**")
+        sent_msg = await client.send_message(message.chat.id, f"**__Haiikk! Mengambil detail lagu... __**")
         songDetails = await YouTubeSearch(song_url_name, 1)
 
         if songDetails is not None and len(songDetails) > 0:
             song_info = songDetails[0]
             if time_to_seconds(song_info['duration']) > (int(Config.get('ALLOWED_SONG_DURATION_IN_MIN'))*60):
-                m = await sent_msg.edit(f"**__😢 The specified song is too long, Please use a song with less than {Config.get('ALLOWED_SONG_DURATION_IN_MIN')} min duration.__**")
+                m = await sent_msg.edit(f"**__😢 Lagu yang ditentukan terlalu panjang, Silakan gunakan lagu dengan kurang dari {Config.get('ALLOWED_SONG_DURATION_IN_MIN')} min duration.__**")
                 if current_client.get('remove_messages') is not None and current_client.get('remove_messages') > 0:
                     await delayDelete(m, current_client.get('remove_messages'))
                 return
@@ -96,7 +96,7 @@ async def play(client, message, current_client):
                 cover_file_name = None
                 # generate thumbnail only if the song is first one and not for queue
                 if pytgcalls_instance.active is not True:
-                    sent_msg = await sent_msg.edit(f"**__ 🎥 Generating Thumbnail __**")
+                    sent_msg = await sent_msg.edit(f"**__ 🎥 Membuat Gambar Mini __**")
                     cover_file_name = None
                     if song_info.get('thumbnails') is not None and len(song_info['thumbnails']) > 0:
                         cover_file_name = f"images/{uuid.uuid4()}.png"
@@ -104,10 +104,10 @@ async def play(client, message, current_client):
                             song_info['title'], song_info['thumbnails'][-1], cover_file_name)
 
                 # download and process the song
-                sent_msg = await sent_msg.edit(f"**__ ⏱ Beep... Bop... Processing [May Take 30-40 sec]__**")
+                sent_msg = await sent_msg.edit(f"**__ ⏱ Bip... Bop... Memproses [Mungkin Memakan Waktu 30-40 dtk]__**")
                 filename = await DownloaderService.download_and_transcode_song(f"{song_info['link']}")
                 if filename is None:
-                    m = await sent_msg.edit(f"**__✖️ Critical Error while post procesing, Try again! __**")
+                    m = await sent_msg.edit(f"**__✖️ Kesalahan Kritis saat memposting pemrosesan, Coba lagi! __**")
                     if current_client.get('remove_messages') is not None and current_client.get('remove_messages') > 0:
                         await delayDelete(m, current_client.get('remove_messages'))
                     return
@@ -117,7 +117,7 @@ async def play(client, message, current_client):
                         footer = f"{Config.get('PLAYBACK_FOOTER')}".replace(
                             '\\n', '\n')
                     footer_val = (
-                        '\n'+footer) if footer is not None else '\nFor any issues contact @voicechatsupport'
+                        '\n'+footer) if footer is not None else '\nuntuk masalah apapun hubungi @xskull7'
 
                     # if curernt call is there , then add it to queue
                     if pytgcalls_instance.active is True:
@@ -134,7 +134,7 @@ async def play(client, message, current_client):
 
                     response = await pytgcalls_instance.start_playback(filename, song_info, requested_by)
                     if response is not True:
-                        m = await sent_msg.edit(f"**__😢 Unable to perform the required operation.__**\n{response}")
+                        m = await sent_msg.edit(f"**__😢 Tidak dapat melakukan operasi yang diperlukan.__**\n{response}")
                         if current_client.get('remove_messages') is not None and current_client.get('remove_messages') > 0:
                             await delayDelete(m, current_client.get('remove_messages'))
 
@@ -148,17 +148,17 @@ async def play(client, message, current_client):
                             input_peer = await callmanager.user_app.resolve_peer(message.chat.id)
                             chat = await callmanager.user_app.send(GetFullChannel(channel=input_peer))
                             title_change = EditGroupCallTitle(call=chat.full_chat.call,
-                                                              title="Song Player | By SkTechHub")
+                                                              title="Song Player | By Dimas Botz")
                             await callmanager.user_app.send(title_change)
                         except Exception as ex:
                             logWarning(
-                                f"Unable to change group call title : {ex}")
+                                f"Tidak dapat mengubah judul panggilan grup : {ex}")
 
                         if cover_file_name is not None and os.path.exists(cover_file_name):
                             logInfo(
-                                f"Sending cover mesage in chat : {chat_id} : {cover_file_name}")
+                                f"Mengirim pesan sampul dalam obrolan: {chat_id} : {cover_file_name}")
 
-                            caption = f"**🎧 Name:** `{(song_info['title'].strip())[:20]}`\n**⏱ Duration:** `{song_info['duration']}`\n**💡 Requester:** {req_by}\n\n`Join voice chat to listen to the song.`{footer_val}"
+                            caption = f"**🎧 Nama:** `{(song_info['title'].strip())[:20]}`\n**⏱ Duration:** `{song_info['duration']}`\n**💡 Peminta:** {req_by}\n\n`Bergabunglah dengan obrolan suara untuk mendengarkan lagu.`{footer_val}"
                             m = await client.send_photo(
                                 message.chat.id,
                                 photo=cover_file_name,
@@ -169,13 +169,13 @@ async def play(client, message, current_client):
                                 os.remove(cover_file_name)
                         else:
 
-                            m = await sent_msg.edit(f"**✅ Playing Now **\n\n**🎧 Name:** `{(song_info['title'].strip())[:20]}`\n**⏱ Duration:** `{song_info['duration']}`\n**💡 Requester:** {req_by}{footer_val}")
+                            m = await sent_msg.edit(f"**✅ Bermain Sekarang **\n\n**🎧 Nama:** `{(song_info['title'].strip())[:20]}`\n**⏱ Duration:** `{song_info['duration']}`\n**💡 Peminta:** {req_by}{footer_val}")
                         # if current_client.get('remove_messages') is not None and current_client.get('remove_messages') > 0:
                         #     await delayDelete(m, current_client.get('remove_messages'))
                         return
                     return
 
-        m = await sent_msg.edit(f"**__😢 Unable to find the required song, Please try again.__**")
+        m = await sent_msg.edit(f"**__😢 Tidak dapat menemukan lagu yang dibutuhkan, Silakan coba lagi.__**")
         if current_client.get('remove_messages') is not None and current_client.get('remove_messages') > 0:
             await delayDelete(m, current_client.get('remove_messages'))
         return
