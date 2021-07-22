@@ -104,7 +104,7 @@ async def play(client, message, current_client):
                             song_info['title'], song_info['thumbnails'][-1], cover_file_name)
 
                 # download and process the song
-                sent_msg = await sent_msg.edit(f"**__ ⏱ Bip... Bop... Memproses [Mungkin Memakan Waktu 30-40 dtk]__**")
+                sent_msg = await sent_msg.edit(f"**__ ⏱ Dar... Der...Dor... Memproses [Mungkin Memakan Waktu 30-40 dtk]__**")
                 filename = await DownloaderService.download_and_transcode_song(f"{song_info['link']}")
                 if filename is None:
                     m = await sent_msg.edit(f"**__✖️ Kesalahan Kritis saat memposting pemrosesan, Coba lagi! __**")
