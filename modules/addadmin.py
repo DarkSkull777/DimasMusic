@@ -117,7 +117,7 @@ async def removeAdmins(client, message, current_client):
             f"membuat panggilan untuk menghapus admin di obrolan : {chat_id} , admins : {newadmin}")
 
         MongoDBClient.remove_admins(chat_id, newadmin)
-        m = await client.send_message(message.chat.id, f"**__Berhasil menghapus pengguna dari daftar admin : {newadmin['username'] jika admin baru['username'] tidak masuk [''] lain admin baru['chat_id']}__**")
+        m = await client.send_message(message.chat.id, f"**__Successfully added the user to admin list : {newadmin['username'] if newadmin['username'] not in [''] else newadmin['chat_id']}__**")
         if current_client.get('remove_messages') is not None and current_client.get('remove_messages') > 0:
             await delayDelete(m, current_client.get('remove_messages'))
         return
