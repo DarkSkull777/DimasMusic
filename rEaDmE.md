@@ -32,7 +32,7 @@ Command | Description
 /adminmode [on,off] | Mengaktifkan/menonaktifkan mode admin.
 
 <p align="center">
-  <img width="425" height="300" src="https://telegra.ph/file/582e4a4322f972e8b29c9.jpg">
+  <img src="https://telegra.ph/file/582e4a4322f972e8b29c9.jpg">
 </p
 
 # Developer
